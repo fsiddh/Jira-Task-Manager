@@ -209,7 +209,7 @@ body {
 /* ============ FOOTER ============ */
 
 .footer {
-	height: 20vh;
+	height: 16vh;
 	/* border: 1px solid red; */
 	display: flex;
 	justify-content: flex-end;
@@ -217,10 +217,11 @@ body {
 }
 
 .clear {
-	height: 70%;
-	width: 10rem;
+	height: 65%;
+	width: 6.5rem;
 	/* border: 1px solid green; */
-	padding: 1rem 1.5rem;
+	/* padding: 1rem 1.5rem; */
+	margin-right: 3rem;
 }
 
 .clearBtn {
