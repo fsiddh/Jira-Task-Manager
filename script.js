@@ -306,6 +306,8 @@ function lockUnlockToggle(e) {
 	}
 }
 
+// On clicking a particular color -> that colored tasks get displayed
+// On doubleclicking a particular color -> all tasks get displayed
 (function displaySameColorTasks() {
 	// let taskArr = JSON.parse(localStorage.getItem("allTask"));
 	let allFilterColorElems = filter_container.children;
@@ -332,11 +334,24 @@ function lockUnlockToggle(e) {
 				}
 			}
 		});
+
+		filterColorElem.addEventListener("dblclick", function () {
+			// First remove all taskBoxes from main container
+			let allTaskBox = document.querySelectorAll(".task_container");
+			for (let i = 0; i < allTaskBox.length; i++) {
+				allTaskBox[i].remove();
+			}
+
+			// Then display all textBoxes 
+			for (let i = 0; i < taskArr.length; i++) {
+				let { id, color, task, editable } = taskArr[i];
+				createTask(color, task, false, editable, id);
+			}
+		})
 	}
 })();
 
-// Testing
-
+// Handles all Hoverings
 (function handleAllHovers() {
 	// PLUS BUTTON
 	plusButton.addEventListener("mouseover", function () {
@@ -404,3 +419,5 @@ function lockUnlockToggle(e) {
 	})
 
 })();
+
+
