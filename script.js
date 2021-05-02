@@ -141,7 +141,7 @@ function createTask(color, task, flag, editable, id) {
 			task: task,
 			id: `${uid}`,
 			color: color,
-			editable: true,
+			editable: false,
 		};
 		taskArr.push(obj);
 
@@ -333,4 +333,74 @@ function lockUnlockToggle(e) {
 			}
 		});
 	}
+})();
+
+// Testing
+
+(function handleAllHovers() {
+	// PLUS BUTTON
+	plusButton.addEventListener("mouseover", function () {
+		plusButton.style.backgroundColor = "lightblue";
+	});
+	plusButton.addEventListener("mouseout", function () {
+		plusButton.style.backgroundColor = "#3498db";
+	});
+
+	// CROSS BUTTON
+	crossBtn.addEventListener("mouseover", function () {
+		crossBtn.style.backgroundColor = "#ff7675";
+	});
+
+	crossBtn.addEventListener("mouseout", function () {
+		let flag = true;
+		crossBtn.classList.forEach(function (className) {
+			// If crossBtn is clicked don't perform mouseout feature
+			if (className == "active") {
+				flag = false;
+			}
+		});
+
+		if (flag) {
+			crossBtn.style.backgroundColor = "#d63031";
+		}
+	});
+
+	// FILTER COLORS
+	let pinkBtn = document.querySelector("#toolbarFilterPink");
+	let bluekBtn = document.querySelector("#toolbarFilterBlue");
+	let greenBtn = document.querySelector("#toolbarFilterGreen");
+	let blackBtn = document.querySelector("#toolbarFilterBlack");
+
+	// PINK
+	pinkBtn.children[0].addEventListener("mouseover", function () {
+		pinkBtn.children[0].style.backgroundColor = "#FDA7DF";
+	})
+	pinkBtn.children[0].addEventListener("mouseout", function () {
+		pinkBtn.children[0].style.backgroundColor = "#ff79a8";
+	})
+
+	// BLUE
+	bluekBtn.children[0].addEventListener("mouseover", function () {
+		bluekBtn.children[0].style.backgroundColor = "#7ed6df";
+	})
+	bluekBtn.children[0].addEventListener("mouseout", function () {
+		bluekBtn.children[0].style.backgroundColor = "#1a4299";
+	})
+
+	// GREEN
+	greenBtn.children[0].addEventListener("mouseover", function () {
+		greenBtn.children[0].style.backgroundColor = "#7bed9f";
+	})
+	greenBtn.children[0].addEventListener("mouseout", function () {
+		greenBtn.children[0].style.backgroundColor = "#1c9147";
+	})
+
+	// BLACK
+	blackBtn.children[0].addEventListener("mouseover", function () {
+		blackBtn.children[0].style.backgroundColor = "#485460";
+	})
+	blackBtn.children[0].addEventListener("mouseout", function () {
+		blackBtn.children[0].style.backgroundColor = "#1e272e";
+	})
+
 })();

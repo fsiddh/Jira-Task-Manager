@@ -17,9 +17,10 @@ body {
 }
 .filter-container {
 	height: 60%;
+	width: 17rem;
 	/* border: 1px solid red; */
-	width: 14rem;
-	margin-right: 4rem;
+	margin-right: 3rem;
+	margin-left: 3rem;
 	background-color: #2d3436;
 	display: flex;
 }
@@ -27,40 +28,40 @@ body {
 .filter-container > * {
 	border: 1px solid #2d3436;
 	background-color: darkgray;
-	border-radius: 0.5rem;
+	border-radius: 5rem;
 }
 
 .filter {
 	height: 100%;
-	width: 25%;
+	width: 100%;
 	/* perfectly center */
+	/* border: 1px solid red; */
 	display: flex;
 	justify-content: center;
 	align-items: center;
 }
 .filter_color {
-	margin: 0;
-	height: 40%;
-	width: 40%;
+	height: 90%;
+	width: 90%;
 	/* border: 1px solid red; */
-	border-radius: 0.2rem;
+	border-radius: 5rem;
 }
 .pink {
-	background-color: pink;
+	background-color: #ff79a8;
 }
 .blue {
-	background-color: blue;
+	background-color: #1a4299;
 }
 .green {
-	background-color: green;
+	background-color: #1c9147;
 }
 .black {
-	background-color: rgb(26, 23, 23);
+	background-color: #1e272e;
 }
 .action-container {
-	height: 60%;
+	height: 40%;
+	width: 6rem;
 	/* border: 1px solid red; */
-	width: 8rem;
 	background-color: #2d3436;
 	display: flex;
 }
@@ -68,7 +69,7 @@ body {
 .action-container>*{
 	border: 1px solid #2d3436;
 	background-color: darkgray;
-	border-radius: 1rem;
+	border-radius: 6rem;
 }
 
 .icon-container {
@@ -79,11 +80,19 @@ body {
 	align-items: center;
 }
 /* icons -> text */
+.plus{
+	background-color: #3498db;
+}
+
+.cross{
+	background-color: #d63031;
+}
+
 .fas {
 	font-size: 1.5rem;
 }
 .active {
-	background-color: #474a4b;
+	background-color: #ff7675;
 }
 /* ============ TOOLBAR ============ */
 
