@@ -1,1 +1,0 @@
-# Jira-Task-Manager
