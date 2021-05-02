@@ -7,6 +7,7 @@ body {
 	background-color: #ecf0f1;
 }
 
+/* ============ TOOLBAR ============ */
 .toolbar {
 	height: 12vh;
 	background-color: #2d3436;
@@ -19,25 +20,30 @@ body {
 	/* border: 1px solid red; */
 	width: 14rem;
 	margin-right: 4rem;
-	border-radius: 0.2rem;
-	background-color: #6d7c7e;
+	background-color: #2d3436;
 	display: flex;
 }
+
+.filter-container > * {
+	border: 1px solid #2d3436;
+	background-color: darkgray;
+	border-radius: 0.5rem;
+}
+
 .filter {
 	height: 100%;
-	/* 1/4 */
 	width: 25%;
-	/* border: 1px solid red; */
 	/* perfectly center */
 	display: flex;
 	justify-content: center;
 	align-items: center;
 }
 .filter_color {
+	margin: 0;
 	height: 40%;
 	width: 40%;
 	/* border: 1px solid red; */
-	border-radius: 0.1rem;
+	border-radius: 0.2rem;
 }
 .pink {
 	background-color: pink;
@@ -55,11 +61,16 @@ body {
 	height: 60%;
 	/* border: 1px solid red; */
 	width: 8rem;
-	background-color: #6d7c7e;
-	border-radius: 0.2rem;
+	background-color: #2d3436;
 	display: flex;
-	border-radius: 0.2rem solid;
 }
+
+.action-container>*{
+	border: 1px solid #2d3436;
+	background-color: darkgray;
+	border-radius: 1rem;
+}
+
 .icon-container {
 	width: 50%;
 	/* border: 1px solid red; */
@@ -74,7 +85,9 @@ body {
 .active {
 	background-color: #474a4b;
 }
-/* modal css */
+/* ============ TOOLBAR ============ */
+
+/* ============ MODAL CONTAINER ============ */
 .modal_container {
 	position: absolute;
 	height: 18rem;
@@ -118,8 +131,9 @@ body {
 .border {
 	border: 0.2rem solid white;
 }
+/* ============ MODAL CONTAINER ============ */
 
-/* taskBox or taskContainer */
+/* ============ TASK CONTAINER ============ */
 .main_container {
 	height: 88vh;
 	overflow: auto;
@@ -174,3 +188,4 @@ body {
 	bottom: 0.5rem;
 	right: 0.5rem;
 }
+/* ============ TASK CONTAINER ============ */

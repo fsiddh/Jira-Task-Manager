@@ -178,6 +178,24 @@ function changeColor(e) {
 
 	taskFilter.classList.remove(cColor);
 	taskFilter.classList.add(colors[newColorIdx]);
+
+	// Updating in Local Storage
+	let uidElem = taskFilter.parentNode.children[1].children[0];
+	let uid = uidElem.innerText.split("#")[1];
+	// console.log(uid);
+
+	for (let i = 0; i < taskArr.length; i++) {
+		let { id } = taskArr[i];
+
+		if (uid == id) {
+			taskArr[i].color = colors[newColorIdx]; // local storage me task ke andr purana desc. ko update by naya desc .
+
+			let newTaskArr = JSON.stringify(taskArr);
+			localStorage.setItem("allTask", newTaskArr);
+
+			break;
+		}
+	}
 }
 
 // add and removes "active" class from crossBtn
