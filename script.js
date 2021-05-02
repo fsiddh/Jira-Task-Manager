@@ -388,7 +388,7 @@ function lockUnlockToggle(e) {
 
 	// PINK
 	pinkBtn.children[0].addEventListener("mouseover", function () {
-		pinkBtn.children[0].style.backgroundColor = "#FDA7DF";
+		pinkBtn.children[0].style.backgroundColor = "rgb(255, 186, 241)";
 	})
 	pinkBtn.children[0].addEventListener("mouseout", function () {
 		pinkBtn.children[0].style.backgroundColor = "#ff79a8";
@@ -396,7 +396,7 @@ function lockUnlockToggle(e) {
 
 	// BLUE
 	bluekBtn.children[0].addEventListener("mouseover", function () {
-		bluekBtn.children[0].style.backgroundColor = "#7ed6df";
+		bluekBtn.children[0].style.backgroundColor = "rgb(62, 237, 255)";
 	})
 	bluekBtn.children[0].addEventListener("mouseout", function () {
 		bluekBtn.children[0].style.backgroundColor = "#1a4299";
@@ -404,10 +404,10 @@ function lockUnlockToggle(e) {
 
 	// GREEN
 	greenBtn.children[0].addEventListener("mouseover", function () {
-		greenBtn.children[0].style.backgroundColor = "#7bed9f";
+		greenBtn.children[0].style.backgroundColor = "rgb(45, 255, 122)";
 	})
 	greenBtn.children[0].addEventListener("mouseout", function () {
-		greenBtn.children[0].style.backgroundColor = "#1c9147";
+		greenBtn.children[0].style.backgroundColor = "rgb(28, 145, 71)";
 	})
 
 	// BLACK
