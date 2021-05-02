@@ -119,7 +119,7 @@ body {
 	border: 0.2rem solid white;
 }
 
-/* task css */
+/* taskBox or taskContainer */
 .main_container {
 	height: 88vh;
 	overflow: auto;
@@ -151,4 +151,26 @@ body {
 .uid {
 	color: #444;
 	margin-bottom: 0.1rem;
+}
+
+.lock-unlock {
+	display: flex;
+	justify-content: flex-end;
+	background-color: white;
+	/* border: 1px solid red; */
+}
+
+.fa-lock-open {
+	/* border: 1px solid red; */
+	color: lightgray;
+	position: relative;
+	bottom: 0.5rem;
+	right: 0.5rem;
+}
+
+.fa-lock {
+	color: darkgray;
+	position: relative;
+	bottom: 0.5rem;
+	right: 0.5rem;
 }
