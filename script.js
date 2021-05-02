@@ -342,12 +342,12 @@ function lockUnlockToggle(e) {
 				allTaskBox[i].remove();
 			}
 
-			// Then display all textBoxes 
+			// Then display all textBoxes
 			for (let i = 0; i < taskArr.length; i++) {
 				let { id, color, task, editable } = taskArr[i];
 				createTask(color, task, false, editable, id);
 			}
-		})
+		});
 	}
 })();
 
@@ -389,35 +389,34 @@ function lockUnlockToggle(e) {
 	// PINK
 	pinkBtn.children[0].addEventListener("mouseover", function () {
 		pinkBtn.children[0].style.backgroundColor = "rgb(255, 186, 241)";
-	})
+	});
 	pinkBtn.children[0].addEventListener("mouseout", function () {
 		pinkBtn.children[0].style.backgroundColor = "#ff79a8";
-	})
+	});
 
 	// BLUE
 	bluekBtn.children[0].addEventListener("mouseover", function () {
 		bluekBtn.children[0].style.backgroundColor = "rgb(62, 237, 255)";
-	})
+	});
 	bluekBtn.children[0].addEventListener("mouseout", function () {
 		bluekBtn.children[0].style.backgroundColor = "#1a4299";
-	})
+	});
 
 	// GREEN
 	greenBtn.children[0].addEventListener("mouseover", function () {
 		greenBtn.children[0].style.backgroundColor = "rgb(45, 255, 122)";
-	})
+	});
 	greenBtn.children[0].addEventListener("mouseout", function () {
 		greenBtn.children[0].style.backgroundColor = "rgb(28, 145, 71)";
-	})
+	});
 
 	// BLACK
 	blackBtn.children[0].addEventListener("mouseover", function () {
 		blackBtn.children[0].style.backgroundColor = "#485460";
-	})
+	});
 	blackBtn.children[0].addEventListener("mouseout", function () {
 		blackBtn.children[0].style.backgroundColor = "#1e272e";
-	})
-
+	});
 })();
 
 // Delete all data
@@ -429,8 +428,8 @@ function lockUnlockToggle(e) {
 		for (let i = 0; i < allTaskBox.length; i++) {
 			allTaskBox[i].remove();
 		}
-		
+
 		taskArr = [];
 		localStorage.setItem("allTask", JSON.stringify(taskArr));
-	})
+	});
 })();

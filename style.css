@@ -8,6 +8,8 @@ body {
 }
 
 /* ============ TOOLBAR ============ */
+
+/*FILTER*/
 .toolbar {
 	height: 12vh;
 	background-color: #2d3436;
@@ -57,6 +59,8 @@ body {
 .black {
 	background-color: #1e272e;
 }
+
+/*ACTION*/
 .action-container {
 	height: 40%;
 	width: 6rem;
@@ -93,6 +97,9 @@ body {
 .active {
 	background-color: #ff7675;
 }
+
+/*INFORMATION*/
+
 /* ============ TOOLBAR ============ */
 
 /* ============ MODAL CONTAINER ============ */
