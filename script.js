@@ -3,6 +3,8 @@
 let filter_container = document.querySelector(".filter-container");
 let mainContainer = document.querySelector(".main_container");
 let bothElementsArr = document.querySelectorAll(".icon-container");
+let deleteBtn = document.querySelector(".clear");
+let dustbinIMG = document.querySelector(".fa-trash");
 let crossBtn = bothElementsArr[1];
 let plusButton = bothElementsArr[0];
 let body = document.body;
@@ -419,11 +421,20 @@ function lockUnlockToggle(e) {
 	blackBtn.children[0].addEventListener("mouseout", function () {
 		blackBtn.children[0].style.backgroundColor = "#1e272e";
 	});
+
+	// DELETE ALL BTN
+	deleteBtn.children[0].addEventListener("mouseover", function () {
+		deleteBtn.children[0].style.backgroundColor = "lightcoral";
+		dustbinIMG.style.color = "darkgrey";
+	});
+	deleteBtn.children[0].addEventListener("mouseout", function () {
+		deleteBtn.children[0].style.backgroundColor = "red";
+		dustbinIMG.style.color = "black";
+	});
 })();
 
 // Delete all data
 (function deleteAll() {
-	let deleteBtn = document.querySelector(".clear");
 	let deleteBtnClass = deleteBtn.children[0].children[0].classList[1];
 	deleteBtn.addEventListener("click", function () {
 		let allTaskBox = document.querySelectorAll(".task_container");
