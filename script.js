@@ -71,6 +71,8 @@ function handleModal(modal_container) {
 
 	// Removes border from every filter then adds on the filter which is clicked
 	for (let i = 0; i < modalFilters.length; i++) {
+		modalFilters[i].setAttribute("style", "cursor: pointer");
+	
 		// Adding eventListner on every filter
 		// taaki sare filters ke pass functionality ho ->
 		// click krne pe remove border from every filter and add ho jaye uss clicked filter pe

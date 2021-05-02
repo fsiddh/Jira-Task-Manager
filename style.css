@@ -112,13 +112,14 @@ body {
 	left: calc((100vw - 36rem) / 2);
 	top: 30vh;
 	display: flex;
-	box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.698);
+	box-shadow: 0rem 5rem 30rem black;
 }
 .input_container {
 	height: 100%;
 	width: 73%;
 }
 .modal_input {
+	margin: 0%;
 	height: 100%;
 	width: 100%;
 	outline: none;
@@ -128,6 +129,7 @@ body {
 	/*  line between space */
 	line-height: 145%;
 	font-weight: 400;
+	border: none;
 }
 .modal_filter_container {
 	height: 100%;
@@ -146,6 +148,7 @@ body {
 }
 .border {
 	border: 0.2rem solid white;
+	opacity: 15%;
 }
 /* ============ MODAL CONTAINER ============ */
 
@@ -170,9 +173,10 @@ body {
 }
 .task_container {
 	margin-top: 3rem;
+	margin-right: 1rem;
 	/* border: 1px solid red; */
 	height: 10rem;
-	width: 18rem;
+	width: 20rem;
 	background-color: #fff;
 }
 .task_desc_container {
@@ -185,7 +189,7 @@ body {
 	text-align: center;
 	/* words */
 	word-break: break-all;
-	/* font-size: 1rem; */
+	font-size: 1rem;
 }
 .uid {
 	color: #444;
