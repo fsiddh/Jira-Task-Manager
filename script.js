@@ -1,10 +1,13 @@
 "use strict";
 
+let filter_container = document.querySelector(".filter-container");
 let mainContainer = document.querySelector(".main_container");
 let bothElementsArr = document.querySelectorAll(".icon-container");
 let crossBtn = bothElementsArr[1];
 let plusButton = bothElementsArr[0];
 let body = document.body;
+
+var editState = "unlock";
 let deleteState = false;
 
 // For new Session
@@ -15,12 +18,12 @@ if (localStorage.getItem("allTask")) {
 	taskArr = JSON.parse(localStorage.getItem("allTask")); // get'em and parse into noraml array from
 	// Display'em on UI
 	for (let i = 0; i < taskArr.length; i++) {
-		let { id, color, task } = taskArr[i];
+		let { id, color, task, editable } = taskArr[i];
 
 		// Sending "false" so that pehele sare purane tasks
 		// pr sare event listners lag jaye (delete krne ka, desc update krne ka, color change krne ka etc).
 		// Fir jab "true" hoga It'll mean naya taskBox bana hai, now store it in local storage and add eventListners n all!
-		createTask(color, task, false, id);
+		createTask(color, task, false, editable, id);
 	}
 }
 
@@ -95,15 +98,16 @@ function handleModal(modal_container) {
 			//  remove modal
 			modal_container.remove();
 
-			// create taskBox 
+			// create taskBox
 			// Here "true" means abhi naya textBox bana hai -> store its info in local storage
 			// then add all eventListners n all.
-			createTask(cColor, textArea.value, true);
+			createTask(cColor, textArea.value, true, false);
 		}
 	});
 }
 
-function createTask(color, task, flag, id) {
+function createTask(color, task, flag, editable, id) {
+	console.log("Creating TaskBox");
 	// Creating div for taskBox
 	let taskContainer = document.createElement("div");
 
@@ -111,13 +115,24 @@ function createTask(color, task, flag, id) {
 	let uifn = new ShortUniqueId();
 	let uid = id || uifn();
 
+	// Getting Lock/Unlock State
+	let lockUnlockClass;
+	if (editable === true) {
+		lockUnlockClass = `<i class="fas fa-lock-open"></i>`;
+	} else {
+		lockUnlockClass = `<i class="fas fa-lock"></i>`;
+	}
+
 	taskContainer.setAttribute("class", "task_container");
 	taskContainer.innerHTML = `
     <div class="task_filter ${color}"></div>
     <div class="task_desc_container">
         <h3 class="uid">#${uid}</h3>
         <div class="task_desc" contenteditable="true" >${task}</div>
-    </div>`;
+    </div>
+	<div class="lock-unlock">
+		${lockUnlockClass}
+	</div>`;
 	mainContainer.appendChild(taskContainer);
 
 	// Store/Set current Session's textBox info in local storage
@@ -126,23 +141,31 @@ function createTask(color, task, flag, id) {
 			task: task,
 			id: `${uid}`,
 			color: color,
-        };
-        taskArr.push(obj);
-        
+			editable: true,
+		};
+		taskArr.push(obj);
+
 		let finalArr = JSON.stringify(taskArr);
 		localStorage.setItem("allTask", finalArr);
 	}
 
-    // Adding eventListner of changing color of taskFilter on every taskBox
+	// Adding eventListner of changing color of taskFilter on every taskBox
 	let taskFilter = taskContainer.querySelector(".task_filter");
-    taskFilter.addEventListener("click", changeColor);
-    
-    // Adding eventListner of getting deleted(if crossBtn is pressed) on every taskBox
-    taskContainer.addEventListener("click", deleteTask);
-    
-    // Adding eventListner for editing taskDesc on every taskBox
+	taskFilter.addEventListener("click", changeColor);
+
+	// Adding eventListner of getting deleted(if crossBtn is pressed) on every taskBox
+	taskContainer.addEventListener("click", deleteTask);
+
+	// Adding eventListner for editing taskDesc on every taskBox
 	let taskDesc = taskContainer.querySelector(".task_desc");
-	taskDesc.addEventListener("keypress", editTask);
+	taskDesc.addEventListener("click", editTask);
+
+	// Testing
+	let lock_unlockElems = document.querySelectorAll(".lock-unlock");
+	for (let i = 0; i < lock_unlockElems.length; i++) {
+		let childElem = lock_unlockElems[i].children[0];
+		childElem.addEventListener("click", lockUnlockToggle);
+	}
 }
 
 // Change color of taskBox
@@ -151,8 +174,8 @@ function changeColor(e) {
 	let colors = ["pink", "blue", "green", "black"];
 	let cColor = taskFilter.classList[1];
 	let idx = colors.indexOf(cColor);
-    let newColorIdx = (idx + 1) % 4;
-    
+	let newColorIdx = (idx + 1) % 4;
+
 	taskFilter.classList.remove(cColor);
 	taskFilter.classList.add(colors[newColorIdx]);
 }
@@ -180,7 +203,7 @@ function deleteTask(e) {
 		let uidElem = taskContainer.querySelector(".uid");
 		let uid = uidElem.innerText.split("#")[1];
 
-		// Amongst all the taskBoxes find the taskBox whose id matches uid 
+		// Amongst all the taskBoxes find the taskBox whose id matches uid
 		for (let i = 0; i < taskArr.length; i++) {
 			let { id } = taskArr[i];
 			if (uid == id) {
@@ -202,21 +225,94 @@ function deleteTask(e) {
 function editTask(e) {
 	let taskDesc = e.currentTarget;
 
-	// Get uid of textDesc which is clicked
-	let uidElem = taskDesc.parentNode.children[0];
-	let uid = uidElem.innerText.split("#")[1];
+	// Check whether its lock or unlock Btn
+	let lockUnlockBtn =
+		taskDesc.parentNode.parentNode.children[2].children[0].classList[1];
 
-	// For uid -> update "taskArr[i].task" by updated desc in local storage
+	// If -> btn==LOCK -> disable input functionality of text area
+	// Else if -> btn==UNLOCK -> enable input functionality of text area -> Update local area with newDesc
+	if (lockUnlockBtn === "fa-lock") {
+		taskDesc.setAttribute("contenteditable", "false");
+	} else if (lockUnlockBtn === "fa-lock-open") {
+		taskDesc.setAttribute("contenteditable", "true");
+
+		taskDesc.addEventListener("keypress", function () {
+			// Get uid of textDesc which is clicked
+			let uidElem = taskDesc.parentNode.children[0];
+			let uid = uidElem.innerText.split("#")[1];
+
+			// For uid -> update "taskArr[i].task" by updated desc in local storage
+			for (let i = 0; i < taskArr.length; i++) {
+				let { id } = taskArr[i];
+
+				if (uid == id) {
+					taskArr[i].task = taskDesc.innerText; // local storage me task ke andr purana desc. ko update by naya desc .
+
+					let newTaskArr = JSON.stringify(taskArr);
+					localStorage.setItem("allTask", newTaskArr);
+
+					break;
+				}
+			}
+		});
+	}
+}
+
+// Adding lock-unlock feature
+function lockUnlockToggle(e) {
+	let myElem = e.currentTarget;
+	let myClassName = e.currentTarget.classList[1];
+
+	// Get uid of current lock or unlock btn's taskBox
+	let uid = myElem.parentNode.parentNode.children[1].children[0].innerText.split(
+		"#"
+	)[1];
+
+	// Find taskBox with same uid and then change it's lock to unlock or unlock to lock btn (also updating it's editability resp.)
+	// and update in local storage with updated editiability
 	for (let i = 0; i < taskArr.length; i++) {
 		let { id } = taskArr[i];
-		
 		if (uid == id) {
-			taskArr[i].task = taskDesc.innerText; // local storage me task ke andr purana desc. ko update by naya desc .
+			if (myClassName == "fa-lock-open") {
+				myElem.setAttribute("class", "fas fa-lock");
+				taskArr[i].editable = false;
+			} else {
+				myElem.setAttribute("class", "fas fa-lock-open");
+				taskArr[i].editable = true;
+			}
 
 			let newTaskArr = JSON.stringify(taskArr);
 			localStorage.setItem("allTask", newTaskArr);
-
 			break;
 		}
 	}
 }
+
+(function displaySameColorTasks() {
+	// let taskArr = JSON.parse(localStorage.getItem("allTask"));
+	let allFilterColorElems = filter_container.children;
+
+	for (let i = 0; i < allFilterColorElems.length; i++) {
+		let filterColorElem = allFilterColorElems[i];
+		filterColorElem.addEventListener("click", function (e) {
+			// First remove all taskBoxes from main container
+			let allTaskBox = document.querySelectorAll(".task_container");
+			for (let i = 0; i < allTaskBox.length; i++) {
+				allTaskBox[i].remove();
+			}
+
+			// Then display all textBoxes with same color
+			let currentFilterColor = e.currentTarget.children[0].classList[1];
+			for (let i = 0; i < taskArr.length; i++) {
+				let { color, id, task, editable } = taskArr[i];
+				// console.log(i, ":------> ", taskArr[i]);
+				// console.log("taskArr[i] ka Color: ", color);
+				// console.log("Clicked Color: ", currentFilterColor);
+
+				if (currentFilterColor === color) {
+					createTask(color, task, false, editable, id);
+				}
+			}
+		});
+	}
+})();
