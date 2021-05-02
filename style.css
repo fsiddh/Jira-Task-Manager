@@ -3,7 +3,7 @@
 }
 body {
 	margin: 0px;
-	font-family: 'Raleway', sans-serif;
+	font-family: "Raleway", sans-serif;
 	background-color: #ecf0f1;
 }
 
@@ -168,21 +168,29 @@ body {
 	flex-wrap: wrap;
 	margin: 0 auto;
 	margin-top: 2rem;
+	background-color: rgba(211, 211, 211, 0.212);
+	border-radius: 5rem;
 }
 .task_filter {
-	height: 7%;
+	height: 6%;
+	border-radius: 4rem;
+	width: 50%;
+	margin-top: 1rem;
+	margin-left: 5rem;
 }
 .task_container {
 	margin-top: 3rem;
 	margin-right: 1rem;
 	/* border: 1px solid red; */
-	height: 10rem;
+	height: 15rem;
 	width: 20rem;
 	background-color: #fff;
+	border-radius: 4rem;
+	padding: 0.5rem;
 }
 .task_desc_container {
 	height: 80%;
-	margin-left: 0.5rem;
+	text-align: center;
 }
 .task_desc {
 	height: 70%;
@@ -194,10 +202,14 @@ body {
 }
 .uid {
 	color: #444;
-	margin-bottom: 0.1rem;
+	margin-bottom: 1rem;
 }
 
 .lock-unlock {
+	width: 0%;
+	position: relative;
+	bottom: 2.5rem;
+	left: 18rem;
 	display: flex;
 	justify-content: flex-end;
 	background-color: white;
