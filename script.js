@@ -125,12 +125,12 @@ function createTask(color, task, flag, editable, id) {
 
 	taskContainer.setAttribute("class", "task_container");
 	taskContainer.innerHTML = `
-    <div class="task_filter ${color}"></div>
+    <div class="task_filter ${color}" style="cursor: pointer"></div>
     <div class="task_desc_container">
         <h3 class="uid">#${uid}</h3>
         <div class="task_desc" contenteditable="true" >${task}</div>
     </div>
-	<div class="lock-unlock">
+	<div class="lock-unlock" style="cursor: pointer">
 		${lockUnlockClass}
 	</div>`;
 	mainContainer.appendChild(taskContainer);
