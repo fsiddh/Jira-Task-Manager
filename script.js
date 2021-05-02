@@ -420,4 +420,17 @@ function lockUnlockToggle(e) {
 
 })();
 
-
+// Delete all data
+(function deleteAll() {
+	let deleteBtn = document.querySelector(".clear");
+	let deleteBtnClass = deleteBtn.children[0].children[0].classList[1];
+	deleteBtn.addEventListener("click", function () {
+		let allTaskBox = document.querySelectorAll(".task_container");
+		for (let i = 0; i < allTaskBox.length; i++) {
+			allTaskBox[i].remove();
+		}
+		
+		taskArr = [];
+		localStorage.setItem("allTask", JSON.stringify(taskArr));
+	})
+})();
