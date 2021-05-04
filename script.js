@@ -2,9 +2,11 @@
 
 let filter_container = document.querySelector(".filter-container");
 let mainContainer = document.querySelector(".main_container");
-let bothElementsArr = document.querySelectorAll(".icon-container");
 let deleteBtn = document.querySelector(".clear");
 let dustbinIMG = document.querySelector(".fa-trash");
+let closeModalBtn = document.querySelector(".fas.fa-times.new");
+let bothElementsArr = document.querySelectorAll(".icon-container");
+let infoBtn = document.querySelector(".information_container");
 let crossBtn = bothElementsArr[1];
 let plusButton = bothElementsArr[0];
 let body = document.body;
@@ -20,12 +22,12 @@ if (localStorage.getItem("allTask")) {
 	taskArr = JSON.parse(localStorage.getItem("allTask")); // get'em and parse into noraml array from
 	// Display'em on UI
 	for (let i = 0; i < taskArr.length; i++) {
-		let { id, color, task, editable } = taskArr[i];
+		let { id, color, heading, task, editable } = taskArr[i];
 
 		// Sending "false" so that pehele sare purane tasks
 		// pr sare event listners lag jaye (delete krne ka, desc update krne ka, color change krne ka etc).
 		// Fir jab "true" hoga It'll mean naya taskBox bana hai, now store it in local storage and add eventListners n all!
-		createTask(color, task, false, editable, id);
+		createTask(color, heading, task, false, editable, id);
 	}
 }
 
@@ -37,22 +39,28 @@ crossBtn.addEventListener("click", setDeleteState);
 
 // creates Modal Container
 function createModal() {
-	let modalContainer = document.querySelector(".modal_container");
+	// Making everything blur
+	createBlur();
 
+	let modalContainer = document.querySelector(".modal_container");
 	// If "modalContainer" haven't been created yet, create one
 	if (modalContainer == null) {
 		modalContainer = document.createElement("div");
 		modalContainer.setAttribute("class", "modal_container");
 		modalContainer.innerHTML = `
         <div class="input_container">
+			<textarea class="modal_heading_input" 
+            placeholder="Heading"></textarea>
+			<div class="half_border"></div>
             <textarea class="modal_input" 
             placeholder="Enter Your text"></textarea>
         </div>
         <div class="modal_filter_container">
-            <div class="filter pink"></div>
-            <div class="filter blue"></div>
-            <div class="filter green"></div>
-            <div class="filter black"></div>
+			<i class="fas fa-times new" style="cursor: pointer"></i>
+            <div class="filter pink" id="modalpink"></div>
+            <div class="filter blue" id="modalblue"></div>
+            <div class="filter green" id="modalgreen"></div>
+            <div class="filter black" id="modalblack"></div>
         </div>`;
 		body.appendChild(modalContainer);
 		handleModal(modalContainer);
@@ -61,6 +69,14 @@ function createModal() {
 	// Remove the text you wrote in this modalContainer
 	let textarea = modalContainer.querySelector(".modal_input");
 	textarea.value = "";
+
+	// Close Modal & Remove Blur
+	let closeModalBtn = document.querySelector(".new");
+	closeModalBtn.addEventListener("click", function () {
+		let modalContainer = document.querySelector(".modal_container");
+		deleteBlur();
+		modalContainer.remove();
+	});
 }
 
 function handleModal(modal_container) {
@@ -69,12 +85,12 @@ function handleModal(modal_container) {
 		".modal_filter_container .filter"
 	);
 
-	modalFilters[3].classList.add("border"); // Bydefault adds border on black filter
+	// modalFilters[3].classList.add("border"); // Bydefault adds border on black filter
 
 	// Removes border from every filter then adds on the filter which is clicked
 	for (let i = 0; i < modalFilters.length; i++) {
 		modalFilters[i].setAttribute("style", "cursor: pointer");
-	
+
 		// Adding eventListner on every filter
 		// taaki sare filters ke pass functionality ho ->
 		// click krne pe remove border from every filter and add ho jaye uss clicked filter pe
@@ -94,23 +110,33 @@ function handleModal(modal_container) {
 		});
 	}
 
+	//Handling Heading & TextArea
+	let headingArea = document.querySelector(".modal_heading_input");
+	let headingValue = "";
+	headingArea.addEventListener("keydown", function (e) {
+		headingValue = headingArea.value;
+		console.log(headingValue);
+	});
+
 	let textArea = document.querySelector(".modal_input");
 	textArea.addEventListener("keydown", function (e) {
+		console.log(headingValue);
 		// Agr inpur area khali na ho && Enter press ho jaye ->
 		// Delete current Modal and create taskBox with current Modal's data
 		if (e.key == "Enter" && textArea.value != "") {
-			//  remove modal
+			//  remove modal & blur from background
+			deleteBlur();
 			modal_container.remove();
 
 			// create taskBox
 			// Here "true" means abhi naya textBox bana hai -> store its info in local storage
 			// then add all eventListners n all.
-			createTask(cColor, textArea.value, true, false);
+			createTask(cColor, headingValue, textArea.value, true, false);
 		}
 	});
 }
 
-function createTask(color, task, flag, editable, id) {
+function createTask(color, heading, task, flag, editable, id) {
 	console.log("Creating TaskBox");
 	// Creating div for taskBox
 	let taskContainer = document.createElement("div");
@@ -132,6 +158,8 @@ function createTask(color, task, flag, editable, id) {
     <div class="task_filter ${color}" style="cursor: pointer"></div>
     <div class="task_desc_container">
         <h3 class="uid">#${uid}</h3>
+        <h3 class="heading_desc">${heading}</h3>
+		<div class="task_container_heading_border"></div>
         <div class="task_desc" contenteditable="true" >${task}</div>
     </div>
 	<div class="lock-unlock" style="cursor: pointer">
@@ -142,6 +170,7 @@ function createTask(color, task, flag, editable, id) {
 	// Store/Set current Session's textBox info in local storage
 	if (flag == true) {
 		let obj = {
+			heading: heading,
 			task: task,
 			id: `${uid}`,
 			color: color,
@@ -328,13 +357,13 @@ function lockUnlockToggle(e) {
 			// Then display all textBoxes with same color
 			let currentFilterColor = e.currentTarget.children[0].classList[1];
 			for (let i = 0; i < taskArr.length; i++) {
-				let { color, id, task, editable } = taskArr[i];
+				let { color, id, heading, task, editable } = taskArr[i];
 				// console.log(i, ":------> ", taskArr[i]);
 				// console.log("taskArr[i] ka Color: ", color);
 				// console.log("Clicked Color: ", currentFilterColor);
 
 				if (currentFilterColor === color) {
-					createTask(color, task, false, editable, id);
+					createTask(color, heading, task, false, editable, id);
 				}
 			}
 		});
@@ -400,7 +429,7 @@ function lockUnlockToggle(e) {
 
 	// BLUE
 	bluekBtn.children[0].addEventListener("mouseover", function () {
-		bluekBtn.children[0].style.backgroundColor = "rgb(62, 237, 255)";
+		bluekBtn.children[0].style.backgroundColor = "#2663e7";
 	});
 	bluekBtn.children[0].addEventListener("mouseout", function () {
 		bluekBtn.children[0].style.backgroundColor = "#1a4299";
@@ -421,16 +450,6 @@ function lockUnlockToggle(e) {
 	blackBtn.children[0].addEventListener("mouseout", function () {
 		blackBtn.children[0].style.backgroundColor = "#1e272e";
 	});
-
-	// DELETE ALL BTN
-	deleteBtn.children[0].addEventListener("mouseover", function () {
-		deleteBtn.children[0].style.backgroundColor = "lightcoral";
-		dustbinIMG.style.color = "darkgrey";
-	});
-	deleteBtn.children[0].addEventListener("mouseout", function () {
-		deleteBtn.children[0].style.backgroundColor = "red";
-		dustbinIMG.style.color = "black";
-	});
 })();
 
 // Delete all data
@@ -446,3 +465,85 @@ function lockUnlockToggle(e) {
 		localStorage.setItem("allTask", JSON.stringify(taskArr));
 	});
 })();
+
+// Remove and Create Blur
+
+function createBlur() {
+	mainContainer.classList.add("blur");
+	filter_container.classList.add("blur");
+	deleteBtn.classList.add("blur");
+	crossBtn.classList.add("blur");
+	plusButton.classList.add("blur");
+	infoBtn.classList.add("blur");
+}
+
+function deleteBlur() {
+	mainContainer.classList.remove("blur");
+	filter_container.classList.remove("blur");
+	deleteBtn.classList.remove("blur");
+	crossBtn.classList.remove("blur");
+	plusButton.classList.remove("blur");
+	infoBtn.classList.remove("blur");
+}
+
+// Information Button Click
+infoBtn.addEventListener("mouseover", function () {
+	mainContainer.classList.add("blur");
+	filter_container.classList.add("blur");
+	deleteBtn.classList.add("blur");
+	crossBtn.classList.add("blur");
+	plusButton.classList.add("blur");
+
+	let functionalities = document.createElement("div");
+	functionalities.setAttribute("class", "functionalities");
+	functionalities.innerHTML = `<h2><u>Features:</u></h2>
+	<ul>
+		<li><b>Add Tasks:</b> Click '+' Icon.</li>
+		<br />
+		<li><b>Delete Task:</b> Click 'x' Icon.</li>
+		<br />
+		<li>
+			<b>Edit Task:</b> Unlock the lock by pressing the lock
+			button and click the task description.
+		</li>
+		<br />
+		<li>
+			<b>Delete All Tasks:</b> Click Button present in the lower
+			right corner.
+		</li>
+		<br />
+		<li><b>View All Tasks:</b> Double click any color.</li>
+		<br />
+		<li>
+			<b>Lock/Unlock Editing Task:</b> Click Lock/Unlock icon on
+			Task Container.
+		</li>
+		<br />
+		<li><b>Change Color of a Task:</b> Click color bar of Task.</li>
+		<br />
+		<li>
+			<b>Select Color specific Task:</b> Click that specific
+			color.
+		</li>
+		<br />		
+		<li>
+			<b>Setting Color of a Task:</b>
+			After pressing '+' Icon, Enter Heading and your task description, then select the color for your task from the color palette.
+		</li>
+		<br />	
+		<p>
+			<b><i>*All your data will get retained in new session ( Data is stored in the Local Storage ) </b>
+		<i></i></p>
+	</ul>`;
+	body.appendChild(functionalities);
+});
+
+infoBtn.addEventListener("mouseout", function () {
+	mainContainer.classList.remove("blur");
+	filter_container.classList.remove("blur");
+	deleteBtn.classList.remove("blur");
+	crossBtn.classList.remove("blur");
+	plusButton.classList.remove("blur");
+
+	body.removeChild(body.childNodes[body.childNodes.length - 1]);
+});
