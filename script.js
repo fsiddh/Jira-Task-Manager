@@ -106,7 +106,6 @@ function handleModal(modal_container) {
 			// ex: "modalFilters[i]" gives -> "filter black border"
 			// Then select data on idx == 1, which gives the color
 			cColor = modalFilters[i].classList[1];
-			console.log("current color of task", cColor);
 		});
 	}
 
@@ -115,12 +114,10 @@ function handleModal(modal_container) {
 	let headingValue = "";
 	headingArea.addEventListener("keydown", function (e) {
 		headingValue = headingArea.value;
-		console.log(headingValue);
 	});
 
 	let textArea = document.querySelector(".modal_input");
 	textArea.addEventListener("keydown", function (e) {
-		console.log(headingValue);
 		// Agr inpur area khali na ho && Enter press ho jaye ->
 		// Delete current Modal and create taskBox with current Modal's data
 		if (e.key == "Enter" && textArea.value != "") {
@@ -137,13 +134,11 @@ function handleModal(modal_container) {
 }
 
 function createTask(color, heading, task, flag, editable, id) {
-	console.log("Creating TaskBox");
 	// Creating div for taskBox
 	let taskContainer = document.createElement("div");
 
 	// Getting Unique ID
-	let uifn = new ShortUniqueId();
-	let uid = id || uifn();
+	let uid = id || ShortUniqueId;
 
 	// Getting Lock/Unlock State
 	let lockUnlockClass;
