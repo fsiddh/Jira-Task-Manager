@@ -500,10 +500,10 @@ infoBtn.addEventListener("mouseover", function () {
 	<ul>
 		<li><b>Add Tasks:</b> Click '+' Icon.</li>
 		<br />
-		<li><b>Delete Task:</b> Click 'x' Icon.</li>
+		<li><b>Delete Tasks:</b> Click 'x' Icon.</li>
 		<br />
 		<li>
-			<b>Edit Task:</b> Unlock the lock by pressing the lock
+			<b>Edit Tasks:</b> Unlock the lock by pressing the lock
 			button and click the task description.
 		</li>
 		<br />
@@ -512,18 +512,18 @@ infoBtn.addEventListener("mouseover", function () {
 			right corner.
 		</li>
 		<br />
-		<li><b>View All Tasks:</b> Double click any color.</li>
+		<li><b>View All Tasks:</b> Double click any color in the Toolbar.</li>
 		<br />
 		<li>
-			<b>Lock/Unlock Editing Task:</b> Click Lock/Unlock icon on
+			<b>Lock/Unlock Task Editing:</b> Click Lock/Unlock icon on
 			Task Container.
 		</li>
 		<br />
-		<li><b>Change Color of a Task:</b> Click color bar of Task.</li>
+		<li><b>Change Color of a Task:</b> Click color bar of the Task Container.</li>
 		<br />
 		<li>
-			<b>Select Color specific Task:</b> Click that specific
-			color.
+			<b>View Color specific Tasks:</b> Click that specific
+			color in the Toolbar.
 		</li>
 		<br />		
 		<li>
