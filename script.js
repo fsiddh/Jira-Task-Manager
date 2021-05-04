@@ -532,7 +532,7 @@ infoBtn.addEventListener("mouseover", function () {
 		</li>
 		<br />	
 		<p>
-			<b><i>*Don't worry! Your data will be safely stored for the next time you visit us( Data is stored in your Local Storage )</b>
+			<b><i>*Don't worry! Your data will be stored for the next time you visit us.</b>
 		<i></i></p>
 	</ul>`;
 	body.appendChild(functionalities);
