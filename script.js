@@ -138,8 +138,8 @@ function createTask(color, heading, task, flag, editable, id) {
 	let taskContainer = document.createElement("div");
 
 	// Getting Unique ID
-	let uid = id || ShortUniqueId;
-
+	let uid = id || Math.random().toString(36).slice(-8);
+	console.log(uid);
 	// Getting Lock/Unlock State
 	let lockUnlockClass;
 	if (editable === true) {
@@ -215,7 +215,7 @@ function changeColor(e) {
 	for (let i = 0; i < taskArr.length; i++) {
 		let { id } = taskArr[i];
 
-		if (uid == id) {
+		if (uid === id) {
 			taskArr[i].color = colors[newColorIdx]; // local storage me task ke andr purana desc. ko update by naya desc .
 
 			let newTaskArr = JSON.stringify(taskArr);
