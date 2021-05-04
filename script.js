@@ -377,8 +377,8 @@ function lockUnlockToggle(e) {
 
 			// Then display all textBoxes
 			for (let i = 0; i < taskArr.length; i++) {
-				let { id, color, task, editable } = taskArr[i];
-				createTask(color, task, false, editable, id);
+				let { id, heading, color, task, editable } = taskArr[i];
+				createTask(color, heading, task, false, editable, id);
 			}
 		});
 	}
