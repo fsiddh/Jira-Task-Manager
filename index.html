@@ -76,10 +76,20 @@
 		<div class="information_container" style="cursor: pointer">
 			<i class="fas fa-info"></i>
 		</div>
+		<!-- Global site tag (gtag.js) - Google Analytics -->
 		<script
-			src="https://cdn.jsdelivr.net/npm/short-unique-id@latest/dist/short-unique-id.min.js"
-			defer
+			async
+			src="https://www.googletagmanager.com/gtag/js?id=G-JE08KTH54T"
 		></script>
+		<script>
+			window.dataLayer = window.dataLayer || [];
+			function gtag() {
+				dataLayer.push(arguments);
+			}
+			gtag("js", new Date());
+
+			gtag("config", "G-JE08KTH54T");
+		</script>
 		<!-- Usage -->
 		<script src="script.js" defer></script>
 	</body>
