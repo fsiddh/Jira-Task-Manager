@@ -25,7 +25,7 @@
 ### Screenshots
 <img src="https://user-images.githubusercontent.com/example.png" height="100px" width="100px"   > 
 <img src="https://user-images.githubusercontent.com/5example.png" height="100px" width="100px"  >
----
+
 
 ## Related Links:
 Project Video Link: https://www.linkedin.com/feed/update/urn:li:activity:6795341183796178944/ <br />
