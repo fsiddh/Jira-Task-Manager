@@ -29,8 +29,8 @@
 
 ## Here are my social media handles:
 
-Linkedin: https://www.linkedin.com/in/falansh-siddh/
-Project Video Link: https://www.linkedin.com/feed/update/urn:li:activity:6795341183796178944/4/
+Linkedin: https://www.linkedin.com/in/falansh-siddh/ <br />
+Project Video Link: https://www.linkedin.com/feed/update/urn:li:activity:6795341183796178944/4/ <br />
 <br />
 Instagram: --
 
