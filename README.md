@@ -18,7 +18,7 @@
 # 🚀 Technical Stack:
 
 ## Frontend:
-- Programming Language: Javascript
+- Programming Language: HTML, CSS and Javascript
 - IDE: VScode
 
 
