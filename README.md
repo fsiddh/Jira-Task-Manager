@@ -26,6 +26,13 @@
 <img src="https://user-images.githubusercontent.com/example.png" height="100px" width="100px"   > 
 <img src="https://user-images.githubusercontent.com/5example.png" height="100px" width="100px"  >
 
+### Preview
+
+
+https://user-images.githubusercontent.com/56497318/127530461-05bfec09-4236-4674-983e-0fd6721ab1f6.mp4
+
+
+
 
 ## Related Links:
 Project Video Link: https://www.linkedin.com/feed/update/urn:li:activity:6795341183796178944/ <br />
